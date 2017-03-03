@@ -33,6 +33,12 @@ describe('Add Http Test Suite',() => {
             assert.equal(url.addHttp(true), 'https://google.com');
         });
 
+
+        it('should not add https:// to string', () => {
+            let url = 'https://google.com';
+            
+            assert.equal(url.addHttp(true), 'https://google.com');
+        });
     });
 
 
