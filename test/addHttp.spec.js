@@ -19,6 +19,10 @@ describe('Add Http Test Suite',() => {
         it('should not add http:// to string if there already', () => {
             assert.equal(url.addHttp(), 'http://google.com');
         });
+
+        it('should add http:// to url when url is uppercase', () => {
+            assert.equal('HTTP://GOOGLE.COM'.addHttp(true), 'https://google.com');
+        });
     });
     
     describe('Add https', () => {
@@ -30,9 +34,9 @@ describe('Add Http Test Suite',() => {
             assert.equal(url.addHttp(true), 'https://google.com');
         });
 
-        // it('should add https:// if begins with https://', () => {
-        //     assert.equal(url.addHttp(true), 'https://google.com');
-        // });
+        it('should change http:// to https://', () => {
+            assert.equal('http://google.com'.addHttp(true), 'https://google.com');
+        });
     });
 
 });

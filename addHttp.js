@@ -1,38 +1,35 @@
-(function() {
-    'use strict';
 
-//    String.prototype.addHttp = function(useHttps) {
-    Object.defineProperty(String.prototype, 'addHttp', {
+'use strict';
 
-        // this.replace( pattern, "THE" );
-        // console.log(this.splice(0, 7));
+Object.defineProperty(String.prototype, 'addHttp', {
+    value(useHttps) {
 
         const https = (typeof useHttps === 'undefined') 
             ? false 
             : useHttps;
 
-        if (this.slice(0, 7) === 'http://' && !https) {
-            return this;
+        const url = this.toLowerCase();
+
+        if (url.slice(0, 7) === 'http://' && !https) {
+            return url;
         }
 
-        if (this.slice(0, 7) !== 'http://' && !https) {
-            return 'http://' + this;
+        if (url.slice(0, 7) !== 'http://' && !https) {
+            return 'http://' + url;
         }
 
-        // if (this.slice(0, 7) === 'http://' && https) {
-        //     let pattern =  new RegExp('http://', 'g');
-        //     console.log(this.replace(pattern, this));
-        //     return 'https://' + this.splice(0, 7);
-        // }
-
-        if (this.slice(0, 8) !== 'https://' && https) {
-            return 'https://' + this;
+        if (url.slice(0, 7) === 'http://' && https) {
+            return url.replace(new RegExp('http://', 'g'), 'https://');
         }
 
-        if (this.slice(0, 8) === 'https://' && https) {
-            return this;
+        if (url.slice(0, 8) !== 'https://' && https) {
+            return 'https://' + url;
         }
 
-        return this;
-    };
-})();
+        if (url.slice(0, 8) === 'https://' && https) {
+            return url;
+        }
+
+        return url;
+    }
+});
