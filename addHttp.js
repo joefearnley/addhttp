@@ -10,16 +10,21 @@ Object.defineProperty(String.prototype, 'addHttp', {
 
         const url = this.toLowerCase();
 
+        if (url.slice(0, 7) === 'http://' && https) {
+            return url.replace(new RegExp('http://', 'g'), 'https://');
+        }
+
+        if (url.slice(0, 8) === 'https://' && !https) {
+            console.log('sldfkjslkdjslkdf');
+            return url.replace(new RegExp('https://', 'g'), 'http://');
+        }
+
         if (url.slice(0, 7) === 'http://' && !https) {
             return url;
         }
 
         if (url.slice(0, 7) !== 'http://' && !https) {
             return 'http://' + url;
-        }
-
-        if (url.slice(0, 7) === 'http://' && https) {
-            return url.replace(new RegExp('http://', 'g'), 'https://');
         }
 
         if (url.slice(0, 8) !== 'https://' && https) {
