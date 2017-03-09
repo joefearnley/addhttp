@@ -4,9 +4,7 @@
 Object.defineProperty(String.prototype, 'addHttp', {
     value(useHttps) {
 
-        const https = (typeof useHttps === 'undefined') 
-            ? false 
-            : useHttps;
+        const https = (typeof useHttps === 'undefined') ? false : useHttps;
 
         const url = this.toLowerCase();
 
@@ -15,7 +13,6 @@ Object.defineProperty(String.prototype, 'addHttp', {
         }
 
         if (url.slice(0, 8) === 'https://' && !https) {
-            console.log('sldfkjslkdjslkdf');
             return url.replace(new RegExp('https://', 'g'), 'http://');
         }
 
